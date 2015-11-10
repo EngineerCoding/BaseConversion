@@ -16,6 +16,8 @@
 
 package com.ameling.base;
 
+import java.util.Arrays;
+
 /**
  * This class is internally used to create a binary series, and to append that with a binary series. It does it by creating an array of booleans because one boolean represents a bit,
  * on (true) or off (false). In the JVM a boolean is stored just like that and thus it is the most ideal value to use3 for this
@@ -57,10 +59,11 @@ public class BitContainer {
 	}
 
 	/**
-	 * Creates a new BitContainer with the given start and length from this container, so it can be evaluated to a sub value
-	 * @param start The start position
+	 * Creates a new BitContainer with this BitContainer as source. It will start at the given position and the amount of elements
+	 * @param start The start position (inclusive)
 	 * @param amount The amount of bits to be contained
 	 * @return A sub container containing the correct bits
+	 * @throws IndexOutOfBoundsException if start + length >= bits()
 	 */
 	public BitContainer getSubContainer(final int start, final int amount) {
 		final BitContainer container = new BitContainer(amount);
@@ -101,19 +104,20 @@ public class BitContainer {
 	}
 
 	@Override
+	public String toString () {
+		return String.format("%d%s", value(), Arrays.toString(bits));
+	}
+
+	@Override
 	public int hashCode () {
-		int result = 17;
-		for (final boolean bool : bits)
-			result += bool ? 53 : 0;
-		result += 53 * bits.length;
-		return result;
+		return 17 + 53 * value();
 	}
 
 	@Override
 	public boolean equals (final Object obj) {
-		if(obj.getClass() == getClass()) {
+		if(obj instanceof BitContainer) {
 			final BitContainer other = (BitContainer) obj;
-			return other.bits.length == bits.length && value() == other.value();
+			return value() == other.value();
 		}
 		return false;
 	}

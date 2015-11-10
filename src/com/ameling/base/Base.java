@@ -163,7 +163,7 @@ public class Base {
 
 	@Override
 	public String toString () {
-		return "base" + Integer.toString(base);
+		return "base" + Integer.toString(base) + Arrays.toString(used_characters);
 	}
 
 	@Override
