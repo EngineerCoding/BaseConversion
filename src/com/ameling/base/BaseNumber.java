@@ -16,22 +16,50 @@
 
 package com.ameling.base;
 
+/**
+ * This class represents a value from the given {@link Base}. This class does not convert the number itself, it simply stores the {@link #base}, {@link #value} and the
+ * {@link #representation} of the number. It can also divide, multiply, add and subtract the number by calculating the values and then converting it with the given base 
+ * or the base it is in.
+ */
 public class BaseNumber {
 
+	/**
+	 * The base this number represents
+	 */
 	private final Base base;
+	
+	/**
+	 * The value of this number
+	 */
 	private final int value;
+	
+	/**
+	 * The representation of the value without the prefix of the base.
+	 */
 	private String representation;
 
+	/**
+	 * Creates a new number of the given variables.
+	 * @param base The {@link Base} this number represents
+	 * @param value The value of this number object
+	 * @param representation The representation of the value, converted by the {@link Base}
+	 */
 	protected BaseNumber (final Base base, final int value, final String representation) {
 		this.base = base;
 		this.value = value;
 		this.representation = representation;
 	}
 
+	/**
+	 * Retrieves the value of this number
+	 */
 	public int value() {
 		return value;
 	}
 
+	/**
+	 * Retrieves the {@link Base} of this number
+	 */
 	public Base getBase() {
 		return base;
 	}
